@@ -12,7 +12,7 @@
 #     regex1 ... regexn jump to the most used directory matching all masks
 #     --l               show the list instead of jumping
 #                       with no args, returns full list
-funcion j() {
+j() {
  # change jfile if you already have a .j file for something else
  jfile=$HOME/.j
  if [ "$1" = "--add" ]; then

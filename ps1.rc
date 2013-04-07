@@ -16,4 +16,3 @@ function promptcmd() {
 }
 
 export PROMPT_COMMAND=promptcmd
-
