@@ -1,0 +1,10 @@
+# ls like commands
+
+alias ls='ls -hF --color=auto'
+alias ll='ls -lhF --color=auto'
+alias la='ls -AF --color=auto'
+alias lrt='ls -lrthF'
+function ld_func {
+  ls -l $* | grep ^d;
+}
+alias ld='ld_func'

@@ -1,0 +1,23 @@
+# cd and dir commands
+
+alias ..='cd ..'
+alias cd..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias .......='cd ../../../../../..'
+
+# mkdir & cd into it
+function mc() {
+  mkdir -p "$*" && cd "$*" && pwd
+}
+
+# swap 2 filenames around
+function swap() {
+  # todo(scottkirkwood): add some checks
+  local TMPFILE=tmp.$$
+  mv "$1" $TMPFILE
+  mv "$2" "$1"
+  mv $TMPFILE "$2"
+}

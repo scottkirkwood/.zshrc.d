@@ -1,0 +1,12 @@
+# Infrequent commands but useful commands.
+
+alias who-has-my-sound='lsof | egrep "dsp|snd"'
+alias my-programs-with-params='ps -U $USER -fwww | cut -b 49- | grep -v "ps -U"'
+alias programs-listening-to-ports='netstat -alnp --protocol=inet | grep -v CLOSE_WAIT | cut -c-6,21-94 | tail'
+alias disk-usage-abusers='du -s -k -c * | sort -rn'
+
+alias most_common_cds='history | python -c "import re,sys;print \"\".join([g.group(1) for g in [re.search(\"^\\d+\\s+(cd [^ ]+)\", l) for l in sys.stdin] if g])" | sort | uniq -c | sort -n'
+
+# Make 9 character pronouncable password
+alias make_password='apg -m 9 -MLNS -a0 -t'
+
