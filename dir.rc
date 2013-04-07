@@ -21,3 +21,20 @@ function swap() {
   mv "$2" "$1"
   mv $TMPFILE "$2"
 }
+
+# Misc
+# Needed for wcd (which is great, btw)
+function wcd {
+  go=$HOME/bin/wcd.go
+  test -f $go && rm -f $go
+  /usr/lib/wcd/wcd.exec $* && test -f $go && source $go
+}
+
+# CD then LL the directory
+function cdl {
+  if [ $# = 0 ]; then
+    ll
+  else
+    cd "$*" && ll
+  fi
+}
