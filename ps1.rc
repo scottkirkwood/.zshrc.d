@@ -1,0 +1,19 @@
+# Prompt, PS1 related commands
+
+function promptcmd() {
+  GITBRANCH=$(__git_ps1|sed 's/..\([^|)]\+\).*/\1/')
+
+  # Append the current command to the history file, for each command
+  history -a
+
+  # \h host
+  # \w path
+  # \t 24 time
+  # Ex;
+  # [asta:branch] ~/tmp
+  # [16:39:28] $
+  PS1="\n${REVERSEDBK}${REVERSEDFK}[\h:${GITBRANCH}] \w${NC}\n[\t] $ "
+}
+
+export PROMPT_COMMAND=promptcmd
+

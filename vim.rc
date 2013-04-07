@@ -1,0 +1,7 @@
+# Vim related options.
+
+# Put vim swap locally
+mkdir -p /var/tmp/`whoami`/vim
+
+# Support vi commands in bash (starts in insert mode).
+set -o vi

@@ -1,0 +1,8 @@
+# Git related options
+
+# Avoid 1-3 second delay before printing prompt
+export GIT_CEILING_DIRECTORIES=/home
+
+# Use meld with git
+export meld_has_output_option=1
+

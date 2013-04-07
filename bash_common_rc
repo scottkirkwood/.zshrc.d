@@ -8,69 +8,11 @@ export COLUMNS
 
 export AUTH_DOMAIN="gmail.com"
 
-# Put vim swap locally
-mkdir -p /var/tmp/`whoami`/vim
-
-# Define some colors
-# Define some colors first:
-red='\e[0;31m'
-RED='\e[1;31m'
-blue='\e[0;34m'
-BLUE='\e[1;34m'
-cyan='\e[0;36m'
-CYAN='\e[1;36m'
-NC='\e[0m'
-REVERSEDBK='\e[30;40m'
-REVERSEDFK='\e[30;37m'
-
-# Avoid 1-3 second delay before printing prompt
-export GIT_CEILING_DIRECTORIES=/home
-
-function promptcmd() {
-  GITBRANCH=$(__git_ps1|sed 's/..\([^|)]\+\).*/\1/')
-
-  # Append the current command to the history file, for each command
-  history -a
-
-  # \h host
-  # \w path
-  # \t 24 time
-  # Ex;
-  # [asta:branch] ~/tmp
-  # [16:39:28] $
-  PS1="\n${REVERSEDBK}${REVERSEDFK}[\h:${GITBRANCH}] \w${NC}\n[\t] $ "
-}
-
-export PROMPT_COMMAND=promptcmd
-
-# Use meld with git
-export meld_has_output_option=1
-
 if echo hello|grep --color=auto l >/dev/null 2>&1; then
   export GREP_OPTIONS='--color=auto' GREP_COLOR='1;34'
 fi
 
 #BASH_COMPLETION="${BASH_COMPLETION:-/etc/bash_completion}"
-
-# Add the j command for most common cd directories
-source ~/bin/j.sh
-
-# Add my completions
-source ~/bin/completions.sh
-
-# Have a huge history
-export HISTFILESIZE=1000000000
-export HISTSIZE=100000
-export HISTTIMEFORMAT="%F %T "
-
-# Ignore exit, ls and lines that start with spaces, and dups
-export HISTCONTROL="ignoreboth:exit:ls:g4 pending:g4change:g4submit:g4vim:g4list"
-
-# Save history on each line - no longer works?
-#set cmdhist
-
-# merge histories from different sessions
-shopt -s histappend
 
 # Use my directory colors
 if [ -f ~/.dir_colors ]; then
@@ -80,20 +22,5 @@ fi
 # Turn off any buzzing or bells
 #xset b off
 
-# Turn off Ctrl-S, Ctrl-Q so that Ctrl-S for forward search
-#  in bash (instead of only Ctrl-R)
-case "$TERM" in
-xterm*|rxvt*)
-    stty stop undef start undef
-    ;;
-*)
-    ;;
-esac
-
 # common commands
 alias common-commands='cut -f1 -d" " $HISTFILE | sort | uniq -c | sort -nr | head -n 30'
-
-# Bash now is vi too
-set -o vi
-
-
