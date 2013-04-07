@@ -1,4 +1,4 @@
-# History related configurations.
+# History related settings.
 
 # Have a huge history
 export HISTFILESIZE=1000000000

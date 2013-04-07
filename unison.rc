@@ -13,7 +13,6 @@ _unison_show() {
 }
 complete -o nospace -F _unison_show unison-gtk unison
 
-
 _run_show() {
   local cur
 

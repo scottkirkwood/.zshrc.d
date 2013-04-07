@@ -6,3 +6,11 @@ export GIT_CEILING_DIRECTORIES=/home
 # Use meld with git
 export meld_has_output_option=1
 
+alias gitstatus='git status'
+alias gs='git status'
+alias gitcheckout='git checkout'
+alias gitbranch='git branch'
+alias gb='git branch'
+alias gc='git checkout'
+# I already have a gitdiff command
+alias gd='git diff'
