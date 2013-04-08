@@ -26,7 +26,7 @@ function dedup_dir_helper() {
 
 # Remove extra dir when unzipping, untarring, or copying incorrectly
 # ex. /mydir/mydir/ becomes /mydir
-function dedup-dir() {
+function dedup_dir() {
   if [ $# == 0 ]; then
     dirname=$(basename $(pwd))
     if [[ -d "$dirname" ]]; then
