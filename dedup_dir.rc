@@ -1,0 +1,47 @@
+# Dedupe a directory like when you expand in a subdirectory and you shouldn't
+# have because the zip or tar is already in the directory.
+
+# Assumes that you are in upper directory and that dirname/subdir is below
+# Will mv dirname/subdir to be just dirname
+function dedup_dir_helper() {
+  test $# != 2 && (echo "Must pass two parameters to dedup_dir_helper"; exit 1)
+  dirname="$1"
+  subdir="$1/$2"
+  test ! -d "$dirname" && (echo "$dirname isn't a directory"; exit 1)
+  test ! -d "$subdir" && (echo "$subdir isn't a directory"; exit 1)
+  echo "De-dupe $subdir"
+  from_dir="$dirname"
+  tmp_dir="${dirname}_temp"
+  subdir2="${tmp_dir}/$2"
+
+  echo "mv $from_dir $tmp_dir"
+  mv --no-clobber "$from_dir" "$tmp_dir"
+
+  echo "mv $subdir2 $dirname"
+  mv --no-clobber "$subdir2" "$dirname"
+
+  echo "rmdir $tmp_dir"
+  rmdir -v "$tmp_dir" || echo "Some stuff left in $tmp_dir, consider running mv \"${tmp_dir}/*\" \"${dirname}\""
+}
+
+# Remove extra dir when unzipping, untarring, or copying incorrectly
+# ex. /mydir/mydir/ becomes /mydir
+function dedup-dir() {
+  if [ $# == 0 ]; then
+    dirname=$(basename $(pwd))
+    if [[ -d "$dirname" ]]; then
+      echo "cd .."
+      cd ..
+      dedup_dir_helper "$dirname" "$dirname"
+    elif [[ -d "../../$dirname" ]]; then
+      echo "cd ../.."
+      cd ../..
+      dedup_dir_helper "$dirname" "$dirname"
+    else
+      echo "Don't know what to do with $dirname"
+    fi
+  elif [[ -d "$1" ]] ; then
+    dirname=$(basename "$1")
+    dedup_dir_helper "$dirname" "$dirname"
+  fi
+}

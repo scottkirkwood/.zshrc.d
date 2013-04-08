@@ -1,0 +1,33 @@
+# Ack and grep like.
+
+# Ack one up
+function ack_dot_func {
+  ack-grep "$*" ..
+}
+function ack_dot2_func {
+  ack-grep "$*" ../..
+}
+function ack_dot3_func {
+  ack-grep "$*" ../../..
+}
+alias ack='ack-grep'
+alias ack.='ack_dot_func'
+alias ack..='ack_dot2_func'
+alias ack...='ack_dot3_func'
+
+# Ignore case versions
+alias grepi='grep -i'
+alias igrep='grep -i'
+
+# Recursive Grep
+alias rgrep='grep -rIPs --exclude-dir=.[a-zA-Z0-9]*'
+
+# Grep typos
+alias gerp='grep'
+alias grpe='grep'
+
+# Stuttering greps
+alias aliass='alias | grep'
+alias historyy='history | grep'
+alias functionss='declare -f'
+alias sets='set | grep'
