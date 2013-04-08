@@ -10,3 +10,7 @@ alias most_common_cds='history | python -c "import re,sys;print \"\".join([g.gro
 # Make 9 character pronouncable password
 alias make_password='apg -m 9 -MLNS -a0 -t'
 
+# Ports
+alias portlist='netstat --listening --numeric-ports --program'
+
+alias find_ips='nmap -sP 192.168.1.0/24'
