@@ -1,10 +1,26 @@
 # ls like commands
 
-alias ls='ls -hF --color=auto'
-alias ll='ls -lhF --color=auto'
-alias la='ls -AF --color=auto'
-alias lrt='ls -lrthF'
-function ld_func {
-  ls -l $* | grep ^d;
+# we always pass these to ls(1)
+# -h Human Readable
+# -G No group names in long listings
+# -F classify file types
+LS_COMMON="-hGF --color=auto"
+
+# if the dircolors utility is available, set that up to
+dircolors="$(type -P gdircolors dircolors | head -1)"
+test -n "$dircolors" && {
+    COLORS=/etc/DIR_COLORS
+    test -e "/etc/DIR_COLORS.$TERM"   && COLORS="/etc/DIR_COLORS.$TERM"
+    test -e "$HOME/.dircolors"        && COLORS="$HOME/.dircolors"
+    test ! -e "$COLORS"               && COLORS=
+    eval `$dircolors --sh $COLORS`
 }
-alias ld='ld_func'
+unset dircolors
+
+# setup the main ls alias if we've established common args
+test -n "$LS_COMMON" && alias ls="command ls $LS_COMMON"
+
+# these use the ls aliases above
+alias ll="ls -l"
+alias l.="ls -d .*"
+alias lrt='ls -lrthF'

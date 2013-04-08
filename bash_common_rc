@@ -8,9 +8,17 @@ export COLUMNS
 
 export AUTH_DOMAIN="gmail.com"
 
-if echo hello|grep --color=auto l >/dev/null 2>&1; then
-  export GREP_OPTIONS='--color=auto' GREP_COLOR='1;34'
-fi
+# Extended glob:
+# ?(pattern-list) Matches zero or one occurrence of the given patterns.
+# *(pattern-list) Matches zero or more occurrences of the given patterns.
+# +(pattern-list) Matches one or more occurrences of the given patterns.
+# @(pattern-list) Matches one of the given patterns.
+# !(pattern-list) Matches anything except one of the given patterns.
+# ex. !(*.jpg|*.gif|*.png) # all but *.jpg, *.gif, *.png
+shopt -s extglob >/dev/null 2>&1
+
+# Why would you try to complete an empty line?
+shopt -s no_empty_cmd_completion >/dev/null 2>&1
 
 #BASH_COMPLETION="${BASH_COMPLETION:-/etc/bash_completion}"
 

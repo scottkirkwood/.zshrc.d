@@ -1,5 +1,8 @@
 # cd and dir commands
 
+# Fix minor errors in directory names.
+shopt -s cdspell >/dev/null 2>&1
+
 alias ..='cd ..'
 alias cd..='cd ..'
 alias ...='cd ../..'

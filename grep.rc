@@ -31,3 +31,8 @@ alias aliass='alias | grep'
 alias historyy='history | grep'
 alias functionss='declare -f'
 alias sets='set | grep'
+
+# Colorize grep.
+if echo hello|grep --color=auto l >/dev/null 2>&1; then
+  export GREP_OPTIONS='--color=auto' GREP_COLOR='1;34'
+fi

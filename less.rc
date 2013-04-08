@@ -1,0 +1,21 @@
+# Less pager
+
+# PAGER
+if test -n "$(command -v less)" ; then
+    # F - quit if fits on one screen
+    # i - ignore case on searches
+    # r - raw
+    # S - Chop long lines instead of wrapping
+    # w - hilight unread
+    # X - disables termcap
+    PAGER="less -FirSwX"
+    MANPAGER="less -FiRswX"
+else
+    PAGER=more
+    MANPAGER="$PAGER"
+fi
+export PAGER MANPAGER
+
+# Ack
+ACK_PAGER="$PAGER"
+ACK_PAGER_COLOR="$PAGER"
