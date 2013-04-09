@@ -1,0 +1,188 @@
+# .bash_aliases
+
+# Infrequent commands
+alias who-has-my-sound='lsof | egrep "dsp|snd"'
+alias my-programs-with-params='ps -U $USER -fwww | cut -b 49- | grep -v "ps -U"'
+alias programs-listening-to-ports='netstat -alnp --protocol=inet | grep -v CLOSE_WAIT | cut -c-6,21-94 | tail'
+alias disk-usage-abusers='du -s -k -c * | sort -rn'
+
+alias most_common_cds='history | python -c "import re,sys;print \"\".join([g.group(1) for g in [re.search(\"^\\d+\\s+(cd [^ ]+)\", l) for l in sys.stdin] if g])" | sort | uniq -c | sort -n'
+
+# Make 9 character pronouncable password
+alias make_password='apg -m 9 -MLNS -a0 -t'
+
+# FF Alias
+alias ff2='env MOZ_NO_REMOTE=1 firefox-3.0 -ProfileManager &'
+# cd commands
+alias ..='cd ..'
+alias cd..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias .......='cd ../../../../../..'
+
+# ls like commands
+alias ls='ls -hF --color=auto'
+alias ll='ls -lhF --color=auto'
+alias la='ls -AF --color=auto'
+alias lrt='ls -lrthF'
+function ld_func {
+  ls -l $* | grep ^d;
+}
+alias ld='ld_func'
+
+# mkdir & cd into it
+function mc() {
+  mkdir -p "$*" && cd "$*" && pwd
+}
+
+# swap 2 filenames around
+function swap() {
+  # todo(scottkirkwood): add some checks
+  local TMPFILE=tmp.$$
+  mv "$1" $TMPFILE
+  mv "$2" "$1"
+  mv $TMPFILE "$2"
+}
+
+# Assumes that you are in upper directory and that dirname/subdir is below
+# Will mv dirname/subdir to be just dirname
+#function dedup_dir_helper() {
+#  test $# != 2 && (echo "Must pass two parameters to dedup_dir_helper"; exit 1)
+#  dirname="$1"
+#  subdir="$1/$2"
+#  test ! -d "$dirname" && (echo "$dirname isn't a directory"; exit 1)
+#  test ! -d "$subdir" && (echo "$subdir isn't a directory"; exit 1)
+#  echo "De-dupe $subdir"
+#  from_dir="$dirname"
+#  tmp_dir="${dirname}_temp"
+#  subdir2="${tmp_dir}/$2"
+#
+#  echo "mv $from_dir $tmp_dir"
+#  mv --no-clobber "$from_dir" "$tmp_dir"
+#
+#  echo "mv $subdir2 $dirname"
+#  mv --no-clobber "$subdir2" "$dirname"
+#
+#  echo "rmdir $tmp_dir"
+#  rmdir -v "$tmp_dir" && echo "Some stuff left in $tmp_dir, consider running mv \"${tmp_dir}/*\" \"${dirname}\""
+#}
+
+# Remove extra dir when unzipping, untarring, or copying incorrectly
+# ex. /mydir/mydir/ becomes /mydir
+#function dedup-dir() {
+#  if [ $# == 0 ]; then
+#    dirname=$(basename $(pwd))
+#    if [[ -d "$dirname" ]]; then
+#      echo "cd .."
+#      cd ..
+#      dedup_dir_helper "$dirname" "$dirname"
+#    elif [[ -d "../../$dirname" ]]; then
+#      echo "cd ../.."
+#      cd ../..
+#      dedup_dir_helper "$dirname" "$dirname"
+#    else
+#      echo "Don't know what to do with $dirname"
+#    fi
+#  elif [[ -d "$1" ]] ; then
+#    dirname=$(basename "$1")
+#    dedup_dir_helper "$dirname" "$dirname"
+#  fi
+#}
+
+# Misc
+# Needed for wcd (which is great, btw)
+function wcd {
+  go=$HOME/bin/wcd.go
+  test -f $go && rm -f $go
+  /usr/lib/wcd/wcd.exec $* && test -f $go && source $go
+}
+
+# CD then LL the directory
+function cdl {
+  if [ $# = 0 ]; then
+    ll
+  else
+    cd "$*" && ll
+  fi
+}
+
+# Make an alias type list of functions
+alias functions='declare -f | grep ^[a-z]'
+
+# Find java imports via ack
+function import_func {
+  ack  --type java --no-filename ^import.*$1 ../../../.. | sort -u;
+}
+alias import='import_func'
+
+# Ack one up
+function ack_dot_func {
+  ack-grep "$*" ..
+}
+function ack_dot2_func {
+  ack-grep "$*" ../..
+}
+function ack_dot3_func {
+  ack-grep "$*" ../../..
+}
+alias ack='ack-grep'
+alias ack.='ack_dot_func'
+alias ack..='ack_dot2_func'
+alias ack...='ack_dot3_func'
+
+# Ignore case versions
+alias grepi='grep -i'
+alias igrep='grep -i'
+
+# Recursive Grep
+alias rgrep='grep -rIPs --exclude-dir=.[a-zA-Z0-9]*'
+
+# My PS function
+function pss() {
+  echo "ps -ewwF | grep $@ | grep -v \"grep .*$*\""
+  ps -ewwF | grep "$@" | grep -v "grep .*$*"
+}
+
+# Stuttering greps
+alias aliass='alias | grep'
+alias historyy='history | grep'
+alias functionss='declare -f'
+alias sets='set | grep'
+
+# Ports
+alias portlist='netstat --listening --numeric-ports --program'
+
+# Typos
+alias gearch='gsearch'
+alias gerp='grep'
+alias grpe='grep'
+
+# git
+alias gitstatus='git status'
+alias gs='git status'
+alias gitcheckout='git checkout'
+alias gitbranch='git branch'
+alias gb='git branch'
+alias gc='git checkout'
+# I already have a gitdiff command
+alias gd='git diff'
+
+alias find_ips='nmap -sP 192.168.1.0/24'
+
+# Kill, ps
+function psgrep() {
+  ps -ewwF | grep "$@" | grep -v "grep $@"
+}
+
+function killone_() {
+  process=$(psgrep "$@" | awk '{ print $2 }')
+  if [ "$process" ]; then
+    echo "kill '$@': $process"
+    kill $process
+  else
+    echo "'$@' not found"
+  fi
+}
+
