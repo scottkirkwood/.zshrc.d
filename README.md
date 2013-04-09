@@ -11,7 +11,7 @@ Put the following in your ~/.bashrc
       [ -x "$script" ] || continue
 
       # execute $script in the context of the current shell
-      source $script
+      . $script
     done
 
 All executable scripts in ~/.bashrc.d/ folder will get
