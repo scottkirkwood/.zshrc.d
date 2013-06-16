@@ -14,3 +14,6 @@ alias make_password='apg -m 9 -MLNS -a0 -t'
 alias portlist='netstat --listening --numeric-ports --program'
 
 alias find_ips='nmap -sP 192.168.1.0/24'
+
+# common commands
+alias common-commands='cut -f1 -d" " $HISTFILE | sort | uniq -c | sort -nr | head -n 30'
