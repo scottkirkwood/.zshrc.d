@@ -7,5 +7,5 @@ mkdir -p /var/tmp/`whoami`/vim
 set -o vi
 
 function gvim () {
-  /usr/bin/gvim -f $* &
+  /usr/bin/gvim -p $*
 }

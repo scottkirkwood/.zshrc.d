@@ -24,3 +24,4 @@ test -n "$LS_COMMON" && alias ls="command ls $LS_COMMON"
 alias ll="ls -l"
 alias l.="ls -d .*"
 alias lrt='ls -lrthF'
+alias lspy='ls -lrt ~/bin/*.py | tail -20'

@@ -14,3 +14,8 @@ alias make_password='apg -m 9 -MLNS -a0 -t'
 alias portlist='netstat --listening --numeric-ports --program'
 
 alias find_ips='nmap -sP 192.168.1.0/24'
+
+alias find_open='find . -perm /u+w,g+w -type f | grep -v "\.pyc\|\.so"'
+
+# Fun stuff
+alias matrix_led='~/sketchbook/led-matrix-tools/matrix_led.py'
