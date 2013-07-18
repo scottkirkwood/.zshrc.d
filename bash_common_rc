@@ -4,8 +4,10 @@
 # (doesn't seem to work)
 export MOZ_NO_REMOTE=1
 
+# Useful for hl command to know the width of the monitor.
 export COLUMNS
 
+# Still needed?
 export AUTH_DOMAIN="gmail.com"
 
 # Extended glob:
@@ -30,5 +32,3 @@ fi
 # Turn off any buzzing or bells
 #xset b off
 
-# common commands
-alias common-commands='cut -f1 -d" " $HISTFILE | sort | uniq -c | sort -nr | head -n 30'

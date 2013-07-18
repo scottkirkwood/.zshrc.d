@@ -1,5 +1,7 @@
 # Vim related options.
 
+export EDITOR='gvim'
+
 # Put vim swap locally
 mkdir -p /var/tmp/`whoami`/vim
 
