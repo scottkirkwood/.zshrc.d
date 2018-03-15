@@ -11,8 +11,10 @@ export HISTCONTROL="ignoreboth:exit:ls:g4 pending:g4change:g4submit:g4vim:g4list
 # Save history on each line - no longer works?
 #set cmdhist
 
-# merge histories from different sessions
-shopt -s histappend
+if [ -n "$BASH_VERSION" ]; then
+  # merge histories from different sessions
+  shopt -s histappend
+fi
 
 # Turn off Ctrl-S, Ctrl-Q so that Ctrl-S for forward search of the history
 #  in bash works as well (instead of only Ctrl-R)
@@ -23,4 +25,3 @@ xterm*|rxvt*)
 *)
     ;;
 esac
-

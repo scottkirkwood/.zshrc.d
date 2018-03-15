@@ -66,7 +66,10 @@ j() {
   [ "$cd" ] && cd "$cd"
  fi
 }
-# bash completions for j
-complete -C 'j --complete "$COMP_LINE"' j
-# prepend to PROMPT_COMMAND
-PROMPT_COMMAND='j --add "$(pwd -P)";'"$PROMPT_COMMAND"
+
+if [ -n "$BASH_VERSION" ]; then
+  # bash completions for j
+  complete -C 'j --complete "$COMP_LINE"' j
+  # prepend to PROMPT_COMMAND
+  PROMPT_COMMAND='j --add "$(pwd -P)";'"$PROMPT_COMMAND"
+fi

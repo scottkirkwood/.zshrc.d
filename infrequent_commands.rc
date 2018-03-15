@@ -23,3 +23,4 @@ alias matrix_led='~/sketchbook/led-matrix-tools/matrix_led.py'
 # common commands
 alias common-commands='cut -f1 -d" " $HISTFILE | sort | uniq -c | sort -nr | head -n 30'
 
+alias keymappings="bind -p | grep -v '^#\|self-insert\|^$'"

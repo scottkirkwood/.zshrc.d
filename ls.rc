@@ -7,7 +7,8 @@
 LS_COMMON="-hGF --color=auto"
 
 # if the dircolors utility is available, set that up to
-dircolors="$(type -P gdircolors dircolors | head -1)"
+#/bin/bash only
+#dircolors="$(type -P gdircolors dircolors | head -1)"
 test -n "$dircolors" && {
     COLORS=/etc/DIR_COLORS
     test -e "/etc/DIR_COLORS.$TERM"   && COLORS="/etc/DIR_COLORS.$TERM"

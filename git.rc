@@ -14,3 +14,10 @@ alias gb='git branch'
 alias gc='git checkout'
 # I already have a gitdiff command
 alias gd='git diff'
+
+
+# git current branch
+function gcb() {
+  git branch | grep '^\*' | cut -c3-
+}
+

@@ -19,10 +19,12 @@ export AUTH_DOMAIN="gmail.com"
 # ex. !(*.jpg|*.gif|*.png) # all but *.jpg, *.gif, *.png
 shopt -s extglob >/dev/null 2>&1
 
-# Why would you try to complete an empty line?
-shopt -s no_empty_cmd_completion >/dev/null 2>&1
+if [ -n "$BASH_VERSION" ]; then
+  # Why would you try to complete an empty line?
+  shopt -s no_empty_cmd_completion >/dev/null 2>&1
 
-#BASH_COMPLETION="${BASH_COMPLETION:-/etc/bash_completion}"
+# BASH_COMPLETION="${BASH_COMPLETION:-/etc/bash_completion}"
+fi
 
 # Use my directory colors
 if [ -f ~/.dir_colors ]; then

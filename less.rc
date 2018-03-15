@@ -4,12 +4,12 @@
 if test -n "$(command -v less)" ; then
     # F - quit if fits on one screen
     # i - ignore case on searches
-    # r - raw
+    # r - raw R - ansi colors
     # S - Chop long lines instead of wrapping
     # w - hilight unread
     # X - disables termcap
-    PAGER="less -FirSwX"
-    MANPAGER="less -FiRswX"
+    PAGER="less -iw"
+    MANPAGER="less -iw"
 else
     PAGER=more
     MANPAGER="$PAGER"
