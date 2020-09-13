@@ -1,0 +1,47 @@
+# git5 name complete (works for g4 as well)
+
+
+git5_name_complete::init() {
+  _common_users=$(cl_reviewers)
+}
+
+# complete single user name
+git5_name_complete::internal::username() {
+  local prefix="$1"
+  local -a compgen_args=()
+
+  if [[ -n "${prefix}" ]]; then
+    compgen_args=(-P "${prefix}")
+  fi
+  compgen_args=("${compgen_args[@]}" -W "${_common_users[*]}")
+  COMPREPLY=($(compgen "${compgen_args[@]}"  -- "${cur}"))
+}
+
+# complete comma separated user name
+git5_name_complete::internal::usernames() {
+  local prefix
+
+  suffix=","
+  if [[ "${cur}" == *,* ]]; then
+    prefix="${cur%,*},"
+  fi
+
+  local cur="${cur##*,}"
+
+  git5_name_complete::internal::username "${prefix}"
+}
+function git5_name_complete() {
+  if [ $COMP_CWORD -lt 2 ]; then
+    return
+  fi
+  local prev="${COMP_WORDS[COMP_CWORD-1]}"
+  local cur="${COMP_WORDS[COMP_CWORD]}"
+  if [[ $prev != "-m" ]]; then
+    return
+  fi
+  git5_name_complete::internal::usernames
+}
+
+git5_name_complete::init
+complete -o nospace -F git5_name_complete git5 g4
+

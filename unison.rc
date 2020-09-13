@@ -11,7 +11,7 @@ _unison_show() {
   cur=${COMP_WORDS[COMP_CWORD]}
   COMPREPLY=($( compgen -W "$(for x in ~/.unison/*.prf; do echo $(basename ${x%.prf}); done)" -- $cur ) )
 }
-complete -o nospace -F _unison_show unison-gtk unison
+#complete -o nospace -F _unison_show unison-gtk unison
 
 _run_show() {
   local cur
@@ -20,5 +20,5 @@ _run_show() {
   cur=${COMP_WORDS[COMP_CWORD]}
   COMPREPLY=($( compgen -W "$(for x in ~/.arg_man/*; do echo $(basename ${x}); done)" -- $cur ) )
 }
-complete -o nospace -F _run_show run
+#complete -o nospace -F _run_show run
 

@@ -14,6 +14,8 @@ alias most_common_cds='history | python -c "import re,sys;print \"\".join([g.gro
 # Make 9 character pronouncable password
 alias make_password='apg -m 9 -MLNS -a0 -t'
 
+alias pyreplacer="python ~/20p/pyreplacer/pyreplacer/replacer.py"
+
 # FF Alias
 alias ff2='env MOZ_NO_REMOTE=1 firefox-3.0 -ProfileManager &'
 # cd commands
@@ -118,29 +120,7 @@ alias functions='declare -f | grep ^[a-z]'
 function import_func {
   ack  --type java --no-filename ^import.*$1 ../../../.. | sort -u;
 }
-alias import='import_func'
-
-# Ack one up
-function ack_dot_func {
-  ack-grep "$*" ..
-}
-function ack_dot2_func {
-  ack-grep "$*" ../..
-}
-function ack_dot3_func {
-  ack-grep "$*" ../../..
-}
-alias ack='ack-grep'
-alias ack.='ack_dot_func'
-alias ack..='ack_dot2_func'
-alias ack...='ack_dot3_func'
-
-# Ignore case versions
-alias grepi='grep -i'
-alias igrep='grep -i'
-
-# Recursive Grep
-alias rgrep='grep -rIPs --exclude-dir=.[a-zA-Z0-9]*'
+alias java-import='import_func'
 
 # My PS function
 function pss() {
@@ -159,8 +139,6 @@ alias portlist='netstat --listening --numeric-ports --program'
 
 # Typos
 alias gearch='gsearch'
-alias gerp='grep'
-alias grpe='grep'
 
 # git
 alias gitstatus='git status'
@@ -189,3 +167,11 @@ function killone_() {
   fi
 }
 
+# limit 10 performs head --lines NN
+function limit() {
+  if [ $# == 0 ]; then
+    head
+  else
+    head --lines $1
+  fi
+}
