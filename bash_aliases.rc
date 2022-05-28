@@ -16,6 +16,10 @@ alias make_password='apg -m 9 -MLNS -a0 -t'
 
 alias pyreplacer="python ~/20p/pyreplacer/pyreplacer/replacer.py"
 
+alias python="python3 -q"
+alias ipython="ipython3 --no-banner --no-confirm-exit"
+alias bookcourt="cd /home/scottkirkwood/20p/bookcourt; go run scripts/bookcourt.go"
+
 # FF Alias
 alias ff2='env MOZ_NO_REMOTE=1 firefox-3.0 -ProfileManager &'
 # cd commands
